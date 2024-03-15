@@ -1,8 +1,9 @@
 import { connectToDB } from "@utils/database";
 import Prompt from "@models/prompt";
-
+import { unstable_noStore as noStore } from "next/cache";
 export const GET = async (request, { params }) => {
   try {
+    noStore();
     await connectToDB();
     const prompts = await Prompt.find({
         creator: params.id
